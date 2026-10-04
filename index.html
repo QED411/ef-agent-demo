@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>E&F live call-up</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink:#1c1915; --muted:#6d655c; --line:#e4ddd2; --paper:#f4efe6; --card:#fffdf9; --accent:#8a3d2f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans",sans-serif; }
+  header, main { padding:22px 28px; }
+  header { border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; align-items:flex-end; }
+  h1 { font-family:Fraunces,serif; font-size:34px; margin:4px 0; letter-spacing:-.03em; font-weight:520; }
+  .k { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  a.pill { text-decoration:none; color:var(--ink); border:1px solid var(--line); background:var(--card); border-radius:999px; padding:8px 12px; font-size:13px; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; }
+  .tabs { display:flex; gap:8px; margin:16px 0; flex-wrap:wrap; }
+  button { font:inherit; border:1px solid var(--line); background:transparent; border-radius:999px; padding:8px 12px; cursor:pointer; }
+  button.on { background:var(--ink); color:#f4efe6; }
+  .grid { display:grid; grid-template-columns:1.2fr .8fr; gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; }
+  h2 { font-family:Fraunces,serif; font-weight:520; margin:0 0 8px; }
+  .tag { display:inline-block; font-size:11px; border-radius:999px; padding:2px 8px; margin:0 4px 4px 0; background:#f3e2dc; color:var(--accent); }
+  .ok { background:#e7efe9; color:#2f6b4f; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td, th { text-align:left; padding:6px 4px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .mono { font-family:ui-monospace,Menlo,monospace; font-size:12px; background:#1c1915; color:#f3eadf; border-radius:10px; padding:12px; white-space:pre-wrap; }
+  .note { color:var(--muted); font-size:13px; }
+  @media (max-width:900px) { .grid, header { display:block; } header, main { padding:16px; } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="k">Called up at the table · 3 Oct 2026 · pending human review</div>
+    <h1>Name a fund. Get the row.</h1>
+    <p class="note">Public ADV, 13F, and the manager’s own materials. Written into the schema already on the sheet. The warehouse can be Sheets tonight and Fabric next quarter. The row does not change.</p>
+  </div>
+  <div class="row">
+    <a class="pill" href="https://docs.google.com/spreadsheets/d/1TjUzB3ywclk5cbci6rOCLEJfAH5THBa5_NynPkVVKFc/edit" target="_blank" rel="noopener">Google Sheet</a>
+    <a class="pill" href="https://adviserinfo.sec.gov/firm/summary/132982" target="_blank" rel="noopener">IAPD ADV</a>
+    <a class="pill" href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1336528&type=13F" target="_blank" rel="noopener">EDGAR 13F</a>
+    <a class="pill" href="https://pershingsquareholdings.com/materials/" target="_blank" rel="noopener">Letters</a>
+  </div>
+</header>
+<main>
+  <div class="tabs">
+    <button class="on" data-p="profile">Risk and ODD</button>
+    <button data-p="letter">Letter read</button>
+    <button data-p="week">Week driver</button>
+    <button data-p="store">Stored row</button>
+  </div>
+  <div class="grid">
+    <section class="card" id="main"></section>
+    <aside class="card">
+      <div class="k">Who this is for</div>
+      <h2>CIO, CCO, or the analyst who owns the file</h2>
+      <p>Ask him what takes three weeks. Text that question. The next view is built from it. This page is the proof that the call-up already works on a name he knows.</p>
+      <p class="note">Not a recommendation. Regulatory AUM is not fund NAV. The 13F book and the PSH NAV are different objects. Human review before reliance.</p>
+    </aside>
+  </div>
+</main>
+<script>
+const pages = {
+  profile: `<h2>Pershing Square Capital Management, L.P.</h2>
+    <span class="tag">CRD 132982</span><span class="tag">801-63688</span><span class="tag ok">ADV 3 Jun 2026</span>
+    <p>Concentrated fundamental value. Regulatory AUM $25.06B, 48 employees, 11 in advisory. Auditor EY. Primes Goldman Sachs and UBS. Admin Northern Trust.</p>
+    <h2>ODD</h2>
+    <table>
+      <tr><th>Item</th><th>Finding</th><th>Severity</th></tr>
+      <tr><td>Disclosure</td><td>2017 settled pay-to-play order, $75,000. Brochure says no material events. ADV disclosure flag is Y.</td><td>High</td></tr>
+      <tr><td>Custody</td><td>Adviser custody $19.39B. Related persons $1.16B. Surprise-exam box not machine-readable.</td><td>Medium</td></tr>
+      <tr><td>Change</td><td>April 2026 Holdco became Pershing Square Inc. First 1940 Act fund. First-time compliance build-out.</td><td>High</td></tr>
+      <tr><td>Filing gap</td><td>Q2 2026 13F-NT. Holdings reported by Pershing Square Inc., not CIK 1336528.</td><td>Medium</td></tr>
+    </table>
+    <h2>Risk</h2>
+    <table>
+      <tr><th>Item</th><th>Finding</th></tr>
+      <tr><td>Concentration</td><td>Q1 2026 13F: 10 names, $13.71B. Top five 78.2%. Brookfield, Amazon, Uber, Microsoft, Restaurant Brands.</td></tr>
+      <tr><td>Key person</td><td>Ackman is CEO, GP, and a significant shareholder. Voting power capped under 25%.</td></tr>
+      <tr><td>Leverage</td><td>PSH August 2026 transparency report: bonds payable $3.64B against NAV $13.94B.</td></tr>
+    </table>`,
+  letter: `<h2>What the public letter stack says</h2>
+    <p>Sourced from the manager’s materials page and the August 2026 transparency report. Not a full letter paraphrase.</p>
+    <table>
+      <tr><th>For</th><th>Output</th></tr>
+      <tr><td>CIO</td><td>PSH NAV $13.94B at 31 Aug 2026. YTD company return −5.2% vs S&P 500 +13.1%. Trailing 1 year −3.2%. The book is still a 10-name 13F. Performance and concentration are the same story.</td></tr>
+      <tr><td>CCO</td><td>2 Jun 2026: quarterly portfolio reviews move to Pershing Square Inc. That matches the 13F-NT. The reporting entity changed. The ODD file has to follow the filer, not the old CIK.</td></tr>
+      <tr><td>Analyst</td><td>Next document to read is the 12 Aug 2026 semiannual package, which includes the investment manager’s report. This row flags it. It does not pretend the letter has been signed off.</td></tr>
+    </table>
+    <p class="note">Sources: pershingsquareholdings.com/materials and the 2 June 2026 communications release.</p>`,
+  week: `<h2>The calendar is the driver</h2>
+    <table>
+      <tr><th>Day</th><th>Block</th><th>Writes</th></tr>
+      <tr><td>Mon</td><td>ODD pass on this row</td><td>review_status = pending human review</td></tr>
+      <tr><td>Tue</td><td>Provider confirm</td><td>auditor, primes, admin</td></tr>
+      <tr><td>Wed</td><td>Letter read</td><td>source_urls += semiannual report</td></tr>
+      <tr><td>Thu</td><td>IC pre-read</td><td>one page from the row, not a new deck</td></tr>
+      <tr><td>Fri</td><td>Close</td><td>what is still pending stays pending</td></tr>
+    </table>
+    <p class="note">Swap the week for IC, board, or exception. Same schema. The question he asks at dinner becomes the next block.</p>`,
+  store: `<h2>Stored. Sheet now. Warehouse later.</h2>
+    <div class="mono">fund_id: CRD-132982
+review_status: pending human review
+nav: 13938133521
+nav_date: 2026-08-31
+nav_basis: PSH transparency report, not regulatory AUM
+reg_aum_usd: 25061606673
+top5_13f_pct: 78.2
+disclosure_flag: Y
+odd_flags: 2017 DRP vs brochure; related-party custody; 13F-NT
+generated_at: 2026-10-03</div>
+    <p>That object is the Google Sheet. The same object is a Databricks or Fabric table. The agent does not care which one you point it at.</p>`
+};
+const main = document.getElementById("main");
+document.querySelectorAll("button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  main.innerHTML = pages[b.dataset.p];
+});
+main.innerHTML = pages.profile;
+</script>
+</body>
+</html>
